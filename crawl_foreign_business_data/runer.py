@@ -5,12 +5,9 @@ from scrapy.utils.log import configure_logging
 from scrapy.utils.project import get_project_settings
 from twisted.internet import reactor
 
-from spiders.spider import (CrawlOtherCompanyLinks, CrawlOtherCountryIndex,
-                            ParseOtherCountryCompanyInfo,
-                            ParseRussiaCompanyInfo, ParseSpainCompanyInfo,
-                            RussiaCrawlCategory, RussiaCrawlCompanyLinks,
-                            RussiaCrawlIndex, SpainCrawlCityIndex,
-                            SpainCrawlPageLink)
+from spiders.other_country_spider import CrawlOtherCountryIndex, CrawlOtherCompanyLinks, ParseOtherCountryCompanyInfo
+from spiders.russia_spider import ParseRussiaCompanyInfo
+from spiders.spain_spider import SpainCrawlCityIndex, SpainCrawlPageLink, ParseSpainCompanyInfo
 
 logger = logging.getLogger(__name__)
 
@@ -21,9 +18,9 @@ def russia_runer():
 
     runner = CrawlerRunner(settings)
 
-    runner.crawl(RussiaCrawlIndex)
-    runner.crawl(RussiaCrawlCategory)
-    runner.crawl(RussiaCrawlCompanyLinks)
+    # runner.crawl(RussiaCrawlIndex)
+    # runner.crawl(RussiaCrawlCategory)
+    # runner.crawl(RussiaCrawlCompanyLinks)
     runner.crawl(ParseRussiaCompanyInfo)
 
     d = runner.join()
@@ -62,3 +59,6 @@ def australia_runer():
     d.addBoth(lambda _: reactor.stop())
 
     reactor.run()
+
+
+russia_runer()

@@ -1,7 +1,6 @@
 """Cmdline"""
 import click
 from click import Context
-
 from runer import australia_runer, russia_runer, spain_runer
 
 
