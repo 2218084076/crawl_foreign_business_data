@@ -4,7 +4,8 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter, is_item
+import random
+
 from scrapy import signals
 from scrapy.downloadermiddlewares.retry import RetryMiddleware
 
@@ -144,3 +145,30 @@ class CrawlForeignBusinessDataProxyMiddleware(object):
         elif request.url.startswith('https://'):
             request.meta['proxy'] = 'https://%s' % self.proxy
             spider.logger.info('proxy %s' % self.proxy)
+
+
+class DefineHeadersMiddleware:
+    """
+    Define Headers Middleware
+    """
+
+    def __init__(self, user_agent):
+        self.user_agent = user_agent
+
+    @classmethod
+    def from_crawler(cls, crawler):
+
+        return cls(user_agent=crawler.settings.get('USER_AGENT'))
+
+    def process_request(self, request, spider):
+        spider_name = spider.name
+        spider.logger.info('spider.name: %s' % spider_name)
+        if 'Russia' in spider_name:
+            request.headers['User-Agent'] = random.choice(self.user_agent.get('RUSSIA'))
+            pass
+        if 'Spain' in spider_name:
+            request.headers['User-Agent'] = random.choice(self.user_agent.get('SPAIN'))
+            pass
+        if 'Other' in spider.name:
+            request.headers['User-Agent'] = random.choice(self.user_agent.get('OTHER_COUNTRY'))
+            pass

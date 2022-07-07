@@ -10,8 +10,7 @@ from itemadapter import ItemAdapter
 from scrapy import Spider
 from scrapy.crawler import Crawler
 
-from crawl_foreign_business_data.repositories.redis_repositories import \
-    RedisRepositories
+from crawl_foreign_business_data.repositories.redis_repositories import RedisRepositories
 
 redis_repositories = RedisRepositories()
 
