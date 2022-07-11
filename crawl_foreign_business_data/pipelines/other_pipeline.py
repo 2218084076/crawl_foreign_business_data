@@ -27,16 +27,16 @@ class OtherPipeline:
             for url in dict(item).get('index'):
                 if 'nzlbusiness' in url:
                     if 'browse' in url:
-                        redis_repositories.write_to_redis('NewZealand_index', url)
+                        redis_repositories.write_to_redis('CrawlOtherCountryIndex', url)
                     if 'company' in url:
-                        redis_repositories.write_to_redis('NewZealand_company_link', url)
+                        redis_repositories.write_to_redis('CrawlOtherCompanyLinks', url)
 
                 if 'aus61business' in url:
                     if 'browse' in url:
-                        redis_repositories.write_to_redis('Australia_index', url)
+                        redis_repositories.write_to_redis('CrawlOtherCountryIndex', url)
 
                     if 'company' in url:
-                        redis_repositories.write_to_redis('Australia_company_link', url)
+                        redis_repositories.write_to_redis('CrawlOtherCompanyLinks', url)
 
                 else:
                     spider.logger.debug('"%s" does not meet the rules!' % url)
@@ -46,9 +46,11 @@ class OtherPipeline:
             company_info = dict(item).get('company_info')
 
             if 'NewZealand' in company_info.get('country'):
+                mongo_repositories.collection_name = 'NewZealand'
                 mongo_repositories.increase(company_info)
                 spider.logger.info('save %s to mongo' % item)
 
-            if 'Australia''NewZealand' in company_info.get('country'):
+            if 'Australia' in company_info.get('country'):
+                mongo_repositories.collection_name = 'Australia'
                 mongo_repositories.increase(company_info)
                 spider.logger.info('save %s to mongo' % item)

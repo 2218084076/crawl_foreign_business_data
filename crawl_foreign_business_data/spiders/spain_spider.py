@@ -41,7 +41,7 @@ class SpainCrawlPageLink(scrapy.Spider, ABC):
     根据分类链接抓取所有页面链接 做区分
     """
     name = 'SpainCrawlPageLink'
-    start_urls = redis_repositories.read_redis('Spain_city')
+    start_urls = redis_repositories.read_redis('SpainCrawlCityIndex')
 
     def parse(self, response, **kwargs):
         """
@@ -66,7 +66,7 @@ class ParseSpainCompanyInfo(scrapy.Spider, ABC):
     解析所有公司详情页
     """
     name = 'parse_spain_company_info'
-    start_urls = redis_repositories.read_redis('Spain_company_links')
+    start_urls = redis_repositories.read_redis('SpainCrawlPageLink')
 
     def parse(self, response, **kwargs):
         """

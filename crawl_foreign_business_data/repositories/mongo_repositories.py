@@ -7,7 +7,6 @@ from scrapy.crawler import Crawler
 
 
 class MongoRepositories:
-
     logger = logging.getLogger(__name__)
 
     def __init__(self, mongo_uri, mongo_db):

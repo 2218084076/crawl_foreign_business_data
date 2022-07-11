@@ -39,7 +39,8 @@ def spain_runer():
     runner = CrawlerRunner(settings)
 
     runner.crawl(SpainCrawlCityIndex)
-    runner.crawl(SpainCrawlPageLink)
+    for i in range(3):
+        runner.crawl(SpainCrawlPageLink)
     runner.crawl(ParseSpainCompanyInfo)
 
     d = runner.join()
@@ -55,13 +56,13 @@ def australia_runer():
     runner = CrawlerRunner(settings)
 
     runner.crawl(CrawlOtherCountryIndex)
-    runner.crawl(CrawlOtherCompanyLinks)
+
+    for i in range(3):
+        runner.crawl(CrawlOtherCompanyLinks)
+
     runner.crawl(ParseOtherCountryCompanyInfo)
 
     d = runner.join()
     d.addBoth(lambda _: reactor.stop())
 
     reactor.run()
-
-
-russia_runer()

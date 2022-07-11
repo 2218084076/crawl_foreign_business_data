@@ -51,7 +51,9 @@ class CrawlOtherCountryIndex(scrapy.Spider, ABC):
 class CrawlOtherCompanyLinks(scrapy.Spider, ABC):
     """Crawl Company Links"""
     name = 'CrawlOtherCompanyLinks'
-    start_urls = redis_repositories.read_redis('NewZealand_index') + redis_repositories.read_redis('Australia_index')
+    # start_urls = redis_repositories.read_redis('CrawlOtherCountryIndex')
+
+    start_urls = ['https://www.aus61business.com/browse/A/8333/']
 
     def parse(self, response, **kwargs):
         """
@@ -70,8 +72,10 @@ class CrawlOtherCompanyLinks(scrapy.Spider, ABC):
 class ParseOtherCountryCompanyInfo(scrapy.Spider):
     """Parse Other Country Company Info"""
     name = 'ParseOtherCountryCompanyInfo'
-    start_urls = redis_repositories.read_redis('Australia_company_link') + redis_repositories.read_redis(
-        'NewZealand_company_link')
+    # start_urls = redis_repositories.read_redis('CrawlOtherCompanyLinks')
+
+    start_urls = ['https://www.aus61business.com/company/A-A-Ham-Pty-Ltd']
+
     country = None
 
     def parse(self, response, **kwargs):

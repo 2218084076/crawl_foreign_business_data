@@ -28,7 +28,7 @@ class SpainPipeline:
             for i in city_list:
                 try:
                     if 'provincia' in i or 'Actividad' in i:
-                        redis_repositories.write_to_redis('Spain_city', i)
+                        redis_repositories.write_to_redis(spider.name, i)
                     else:
                         spider.logger.debug('"%s" does not meet the rules!' % i)
                 except TypeError:
@@ -42,10 +42,10 @@ class SpainPipeline:
                 try:
                     key = link.split('/').pop().split('.html')[0]
                     if key.isupper() and '-' in key:
-                        redis_repositories.write_to_redis('Spain_company_links', link)
+                        redis_repositories.write_to_redis('SpainCrawlPageLink', link)
 
                     if 'PgNum' in link:
-                        redis_repositories.write_to_redis('Spain_city', link)
+                        redis_repositories.write_to_redis('SpainCrawlCityIndex', link)
                     else:
                         spider.logger.debug('"%s" does not meet the rules!' % link)
                 except AttributeError:
