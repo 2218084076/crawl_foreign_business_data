@@ -6,10 +6,9 @@
 # useful for handling different item types with a single interface
 import random
 
+from repositories.redis_repositories import RedisRepositories
 from scrapy import signals
 from scrapy.downloadermiddlewares.retry import RetryMiddleware
-
-from repositories.redis_repositories import RedisRepositories
 
 redis_repositories = RedisRepositories()
 

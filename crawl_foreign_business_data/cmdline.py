@@ -21,14 +21,11 @@ def crawl(name: str):
     """
     if 'Australia' in name:
         australia_runer()
-        print('australia_run()')
 
     if 'Russia' in name:
-        print('russia_run()')
         russia_runer()
 
     if 'Spain' in name:
-        print('spain_run')
         spain_runer()
 
 

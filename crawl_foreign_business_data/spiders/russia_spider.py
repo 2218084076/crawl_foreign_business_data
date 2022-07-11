@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 from items import RussiaCompanyItem
 from repositories.redis_repositories import RedisRepositories
 
-
 redis_repositories = RedisRepositories()
 
 

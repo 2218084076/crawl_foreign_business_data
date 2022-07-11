@@ -1,7 +1,6 @@
-from scrapy import Spider
-
 from repositories.mongo_repositories import MongoRepositories
 from repositories.redis_repositories import RedisRepositories
+from scrapy import Spider
 
 redis_repositories = RedisRepositories()
 mongo_repositories = MongoRepositories('localhost:27017', 'BusinessInfos')
