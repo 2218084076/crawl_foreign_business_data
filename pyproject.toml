@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "crawl_foreign_business_data"
+version = "0.1.0"
+description = ""
+authors = ["Terry <82017869+2218084076@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+

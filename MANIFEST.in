@@ -1,0 +1,9 @@
+include LICENSE
+include MANIFEST.in
+include *.md
+graft docs
+graft tests
+graft src/example_etl
+recursive-include src/example_etl/config/settings.yml
+global-exclude __pycache__
+global-exclude *.py[co]
