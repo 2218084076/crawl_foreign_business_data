@@ -33,7 +33,7 @@ RUSSIA_CONFIG = {
 
 USER_AGENT = {
     'RUSSIA': [
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+        # 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36 Edg/103.0.1264.44'],
     'SPAIN': [
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
@@ -72,17 +72,17 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# SPIDER_MIDDLEWARES = {
-#    'crawl_foreign_business_data.middlewares.CrawlForeignBusinessDataSpiderMiddleware': 543,
-# }
+SPIDER_MIDDLEWARES = {
+    'crawl_foreign_business_data.middlewares.CrawlForeignBusinessDataSpiderMiddleware': 543,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'crawl_foreign_business_data.middlewares.DefineHeadersMiddleware': 340,
-    'crawl_foreign_business_data.middlewares.CrawlForeignBusinessDataDownloaderMiddleware': 543,
+    'crawl_foreign_business_data.middlewares.DefineHeadersMiddleware': 543,
+    # 'crawl_foreign_business_data.middlewares.CrawlForeignBusinessDataDownloaderMiddleware': 543,
     # 'crawl_foreign_business_data.middlewares.CrawlForeignBusinessDataProxyMiddleware': 300,
-    'crawl_foreign_business_data.middlewares.CrawlForeignBusinessDataRetryMiddleware': 400,
+    # 'crawl_foreign_business_data.middlewares.CrawlForeignBusinessDataRetryMiddleware': 400,
 
 }
 
@@ -94,9 +94,11 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#     'crawl_foreign_business_data.pipelines.CrawlForeignBusinessDataPipeline': 300,
-# }
+ITEM_PIPELINES = {
+    'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
+    # 'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
+    # 'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

@@ -40,6 +40,15 @@ class RedisRepositories:
 
         return content_list
 
+    def rewrite(self, name: str, content: str):
+        """
+        rewrite
+        :param name:
+        :param content:
+        :return:
+        """
+        self.redis_content.lpush(name, content)
+
 
 def get_md5(val):
     """

@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 from items import RussiaCompanyItem
 from repositories.redis_repositories import RedisRepositories
 
-# logger = logging.getLogger(__name__)
 
 redis_repositories = RedisRepositories()
 
@@ -34,6 +33,8 @@ def extract_russian_company_links(response):
             if 'https://www.rusprofile.ru' not in url:
                 url = 'https://www.rusprofile.ru' + url
                 category_list.append(url)
+        else:
+            continue
 
     return company_list, category_list
 
@@ -77,7 +78,7 @@ class RussiaCrawlCategory(scrapy.Spider, ABC):
     抓取俄罗斯分类页中所有链接
     """
     name = 'RussiaCrawlCategory'
-    start_urls = redis_repositories.read_redis('Russia_index_list')
+    start_urls = redis_repositories.read_redis('RussiaCrawlIndex')
 
     def parse(self, response, **kwargs):
         """
@@ -100,7 +101,7 @@ class RussiaCrawlCompanyLinks(scrapy.Spider, ABC):
     根据每页链接解析出所有公司详情页链接
     """
     name = 'RussiaCrawlCompanyLinks'
-    start_urls = redis_repositories.read_redis('Russia_pages')
+    start_urls = redis_repositories.read_redis('RussiaCrawlCategory')
 
     def parse(self, response, **kwargs):
         """
@@ -123,9 +124,9 @@ class ParseRussiaCompanyInfo(scrapy.Spider, ABC):
     解析公司详情页中公司信息
     """
     name = 'ParseRussiaCompanyInfo'
-    # start_urls = redis_repositories.read_redis('Russia_company_list')
-    #
-    start_urls = ['https://www.rusprofile.ru/ip/304753421200031']
+    start_urls = redis_repositories.read_redis('RussiaCrawlCompanyLinks')
+
+    # start_urls = ['https://www.rusprofile.ru/ip/304753421200031']
 
     def parse(self, response, **kwargs):
         """

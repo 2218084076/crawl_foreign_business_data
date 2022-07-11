@@ -9,6 +9,10 @@ import random
 from scrapy import signals
 from scrapy.downloadermiddlewares.retry import RetryMiddleware
 
+from repositories.redis_repositories import RedisRepositories
+
+redis_repositories = RedisRepositories()
+
 
 class CrawlForeignBusinessDataSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
@@ -110,6 +114,9 @@ class CrawlForeignBusinessDataRetryMiddleware(RetryMiddleware):
         if request.meta.get('dont_retry', False):
             return response
 
+        if response.status not in self.retry_http_codes:
+            redis_repositories.rewrite(spider.name, request.url)
+
         if response.status in self.retry_http_codes:
             reason = response.status
             spider.logger.info('retry_http_code %s' % response.status)
@@ -117,10 +124,12 @@ class CrawlForeignBusinessDataRetryMiddleware(RetryMiddleware):
         return response
 
     def process_exception(self, request, exception, spider):
+
         if (
                 isinstance(exception, self.EXCEPTIONS_TO_RETRY)
                 and not request.meta.get('dont_retry', False)
         ):
+            redis_repositories.rewrite(spider.name, request.url)
             return self._retry(request, exception, spider)
 
 
@@ -165,10 +174,9 @@ class DefineHeadersMiddleware:
         spider.logger.info('spider.name: %s' % spider_name)
         if 'Russia' in spider_name:
             request.headers['User-Agent'] = random.choice(self.user_agent.get('RUSSIA'))
-            pass
+
         if 'Spain' in spider_name:
             request.headers['User-Agent'] = random.choice(self.user_agent.get('SPAIN'))
-            pass
+
         if 'Other' in spider.name:
             request.headers['User-Agent'] = random.choice(self.user_agent.get('OTHER_COUNTRY'))
-            pass
