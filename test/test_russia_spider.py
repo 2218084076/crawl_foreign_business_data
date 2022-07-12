@@ -1,10 +1,15 @@
 import pytest
 from scrapy import Selector
 
-from spiders.russia_spider import extract_russian_company_links, RussiaCrawlIndex, ParseRussiaCompanyInfo
+from crawl_foreign_business_data.spiders.russia_spider import extract_russian_company_links, RussiaCrawlIndex, \
+    ParseRussiaCompanyInfo
 
 
 def test_extract_russian_links():
+    """
+    test_extract_russian_links
+    :return:
+    """
     with open('data/russia_page.html', 'r', encoding='utf-8') as f:
         response = Selector(text=f.read())
         url = 'https://www.rusprofile.ru/ip/М'
@@ -23,6 +28,11 @@ def test_extract_russian_links():
     ]
 )
 def test_russia_crawl_index(url):
+    """
+    test_russia_crawl_index
+    :param url:
+    :return:
+    """
     page_text = f'''
 <html lang="ru">
     <ul class="letter-list">
@@ -42,6 +52,11 @@ def test_russia_crawl_index(url):
 
 
 def test_parse_russia_company_info(mocker):
+    """
+    test_parse_russia_company_info
+    :param mocker:
+    :return:
+    """
     with open('data/ruaaia_company_info.html', 'r', encoding='utf-8') as f:
         response = mocker.MagicMock(text=f.read())
         result = ParseRussiaCompanyInfo().parse(response)
