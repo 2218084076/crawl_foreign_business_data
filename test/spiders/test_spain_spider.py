@@ -18,8 +18,7 @@ def test_spain_crawl_city_index():
     <li><a href="test2" title></a>
     <li><a href="test3" title></a>
 </ul>
-
-</html>    
+</html>
     '''
     response = Selector(text=page_text)
 
@@ -47,7 +46,7 @@ def test_spain_crawl_page_link():
         <a href="test2">test2</a>
     </div>
 </li>
-</html>    
+</html>
     '''
     response = Selector(text=page_text)
 

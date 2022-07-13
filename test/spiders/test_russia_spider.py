@@ -19,13 +19,15 @@ def test_extract_russian_links():
 <li><a href="/ip/М">page1</a></li>
 
 </html>
-   
    '''
     response = Selector(text=page_text)
     url = 'https://www.rusprofile.ru/ip/М'
 
     result = extract_russian_company_links(url, response)
-    assert result == (['https://www.rusprofile.ru/ip/305233215000190'], ['https://www.rusprofile.ru/ip/М'])
+    assert result == (
+        ['https://www.rusprofile.ru/ip/305233215000190'],
+        ['https://www.rusprofile.ru/ip/М']
+    )
 
 
 @pytest.mark.parametrize(

@@ -16,12 +16,10 @@ def test_extract_australia_links():
     page_text = '''
 <!DOCTYPE html>
 <html lang="en">
-
 <li><a href="test1">1</a></li>
 <li><a href="test2">2</a></li>
 <li><a href="test3">3</a></li>
-
-</html>    
+</html>
     '''
     response = Selector(text=page_text)
 
@@ -78,7 +76,7 @@ def test_parse_other_country_company_info(url):
 <html lang="en">
     <div class="col-xs-12 col-sm-3 row_label">foo</div>
     <div class="col-xs-12 col-sm-9">bar</div>
-</html>    
+</html>
     '''
 
     resp = TextResponse(url=url, body=page_text.encode('utf-8'))

@@ -143,9 +143,8 @@ class ParseRussiaCompanyInfo(scrapy.Spider, ABC):
         info_list = soup.find_all('dl')
         # //*[@id="ab-test-wrp"]/div[1]/div/div[1]/div/div[1]/div[1]
         company_info = {
-            'Название компании': response.xpath('//*[@id="main"]/div/div[1]/div[1]/h1/text()').get().replace('\n',
-                                                                                                             '').replace(
-                ' ', ''),
+            'Название компании':
+                response.xpath('//*[@id="main"]/div/div[1]/div[1]/h1/text()').get().replace('\n', '').replace(' ', ''),
             'page_code': page
         }
         for info in info_list:
