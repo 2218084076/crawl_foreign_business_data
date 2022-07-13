@@ -13,4 +13,3 @@ python = "^3.10"
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
-

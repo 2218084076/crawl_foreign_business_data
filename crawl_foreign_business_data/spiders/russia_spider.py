@@ -1,20 +1,22 @@
 import re
 from abc import ABC
-from urllib.parse import unquote
 
 import scrapy
-import settings
 from bs4 import BeautifulSoup
-from items import RussiaCompanyItem
-from repositories.redis_repositories import RedisRepositories
+
+from crawl_foreign_business_data import settings
+from crawl_foreign_business_data.items import RussiaCompanyItem
+from crawl_foreign_business_data.repositories.redis_repositories import \
+    RedisRepositories
 
 redis_repositories = RedisRepositories()
 
 
 # Russia Spider
-def extract_russian_company_links(response):
+def extract_russian_company_links(page_url, response):
     """
     extract_russian_company_links
+    :param page_url:
     :param response:
     :return:
     """
@@ -28,7 +30,7 @@ def extract_russian_company_links(response):
             if 'https://www.rusprofile.ru' not in url:
                 url = 'https://www.rusprofile.ru' + url
                 company_list.append(url)
-        if unquote(response.url).split('https://www.rusprofile.ru')[1] in url:
+        if page_url.split('https://www.rusprofile.ru')[1] in url:
             if 'https://www.rusprofile.ru' not in url:
                 url = 'https://www.rusprofile.ru' + url
                 category_list.append(url)
@@ -87,7 +89,7 @@ class RussiaCrawlCategory(scrapy.Spider, ABC):
         :return:
         """
         item = RussiaCompanyItem()
-        parse_results = extract_russian_company_links(response)
+        parse_results = extract_russian_company_links(response.url, response)
 
         item['company_list'] = parse_results[0]
         item['page_list'] = parse_results[1]
@@ -110,7 +112,7 @@ class RussiaCrawlCompanyLinks(scrapy.Spider, ABC):
         :return:
         """
         item = RussiaCompanyItem()
-        parse_results = extract_russian_company_links(response)
+        parse_results = extract_russian_company_links(response.url, response)
 
         item['company_list'] = parse_results[0]
         item['page_list'] = parse_results[1]
@@ -139,7 +141,7 @@ class ParseRussiaCompanyInfo(scrapy.Spider, ABC):
         soup = BeautifulSoup(page, 'html.parser')
 
         info_list = soup.find_all('dl')
-
+        # //*[@id="ab-test-wrp"]/div[1]/div/div[1]/div/div[1]/div[1]
         company_info = {
             'Название компании': response.xpath('//*[@id="main"]/div/div[1]/div[1]/h1/text()').get().replace('\n',
                                                                                                              '').replace(

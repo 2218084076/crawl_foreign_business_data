@@ -5,6 +5,12 @@
       <sourceFolder url="file://$MODULE_DIR$/crawl_foreign_business_data" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/crawl_foreign_business_data/crawl_foreign_business_data.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/test/.pytest_cache" />
+      <excludeFolder url="file://$MODULE_DIR$/.pytest_cache" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/crawl_foreign_business_data.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (crawl_foreign_business_data-UYsKe-7Z)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

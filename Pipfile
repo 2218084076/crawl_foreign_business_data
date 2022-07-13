@@ -9,8 +9,12 @@ beautifulsoup4 = "*"
 redis = "*"
 pymongo = "*"
 click = "*"
+isort = "*"
 
 [dev-packages]
+pytest-mock = "*"
+isort = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.10"

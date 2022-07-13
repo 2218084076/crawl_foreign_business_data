@@ -76,8 +76,10 @@ class ParseSpainCompanyInfo(scrapy.Spider, ABC):
         :return:
         """
         item = SpainItem()
-        page = response.text
-
+        try:
+            page = response.text
+        except AttributeError:
+            page = response.get()
         company_info = {
             'page_code': page
         }

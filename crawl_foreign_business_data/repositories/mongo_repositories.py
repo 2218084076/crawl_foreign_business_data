@@ -30,7 +30,7 @@ class MongoRepositories:
 
     def open_mongo(self):
         """
-        open spider
+        open mongo
         :param:
         :return:
         """
@@ -40,7 +40,7 @@ class MongoRepositories:
 
     def close_mongo(self):
         """
-        close spider
+        close mongo
         :param:
         :return:
         """
@@ -48,4 +48,9 @@ class MongoRepositories:
         self.logger.info('close mongo')
 
     def increase(self, item_content: dict):
+        """
+        increase
+        :param item_content:
+        :return:
+        """
         self.db[self.collection_name].insert_one(ItemAdapter(item_content).asdict())

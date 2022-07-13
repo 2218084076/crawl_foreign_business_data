@@ -1,8 +1,8 @@
 import pytest
 from scrapy import Selector
 
-from crawl_foreign_business_data.spiders.russia_spider import extract_russian_company_links, RussiaCrawlIndex, \
-    ParseRussiaCompanyInfo
+from crawl_foreign_business_data.spiders.russia_spider import (
+    ParseRussiaCompanyInfo, RussiaCrawlIndex, extract_russian_company_links)
 
 
 def test_extract_russian_links():
@@ -21,7 +21,7 @@ def test_extract_russian_links():
 @pytest.mark.parametrize(
     'url',
     [
-        "ip/A",
+        "/ip/A",
         "test",
         None,
         "https://www.rusprofile.ru/TEST"
@@ -42,9 +42,9 @@ def test_russia_crawl_index(url):
     '''
     response = Selector(text=page_text)
 
-    if url == "ip/A":
+    if url == "/ip/A":
         result = RussiaCrawlIndex().parse(response)
-        assert result == {'index_list': ['https://www.rusprofile.ru/%s' % url]}
+        assert result == {'index_list': ['https://www.rusprofile.ru%s' % url]}
 
     else:
         result = RussiaCrawlIndex().parse(response)

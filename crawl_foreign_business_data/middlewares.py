@@ -113,7 +113,8 @@ class CrawlForeignBusinessDataRetryMiddleware(RetryMiddleware):
         if request.meta.get('dont_retry', False):
             return response
 
-        if response.status not in self.retry_http_codes:
+        if (response.status not in self.retry_http_codes and
+                response.status != '200'):
             redis_repositories.rewrite(spider.name, request.url)
 
         if response.status in self.retry_http_codes:

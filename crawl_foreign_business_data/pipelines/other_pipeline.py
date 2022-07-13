@@ -1,20 +1,16 @@
-from repositories.mongo_repositories import MongoRepositories
-from repositories.redis_repositories import RedisRepositories
 from scrapy import Spider
+
+from crawl_foreign_business_data.pipelines.base_pipeline import BasePipeline
+from crawl_foreign_business_data.repositories.mongo_repositories import \
+    MongoRepositories
+from crawl_foreign_business_data.repositories.redis_repositories import \
+    RedisRepositories
 
 redis_repositories = RedisRepositories()
 mongo_repositories = MongoRepositories('localhost:27017', 'BusinessInfos')
 
 
-class OtherPipeline:
-
-    def open_spider(self, spider):
-        mongo_repositories.open_mongo()
-        spider.logger.info('Open Spider')
-
-    def close_spider(self, spider):
-        mongo_repositories.close_mongo()
-        spider.logger.info('Close Spider')
+class OtherPipeline(BasePipeline):
 
     def process_item(self, item: dict, spider: Spider):
         """

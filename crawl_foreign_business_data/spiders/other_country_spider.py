@@ -1,16 +1,18 @@
 from abc import ABC
 
 import scrapy
-import settings
-from items import OtherCountryItem
-from repositories.redis_repositories import RedisRepositories
+
+from crawl_foreign_business_data import settings
+from crawl_foreign_business_data.items import OtherCountryItem
+from crawl_foreign_business_data.repositories.redis_repositories import \
+    RedisRepositories
 
 redis_repositories = RedisRepositories()
 
 
 # New Zealand and Australia
 
-def extract_tags_links(response):
+def extract_links(response):
     """
     extract tags links
     提取页面中所有链接
@@ -43,7 +45,7 @@ class CrawlOtherCountryIndex(scrapy.Spider, ABC):
         """
         item = OtherCountryItem()
 
-        item['index'] = extract_tags_links(response)
+        item['index'] = extract_links(response)
 
         return item
 
@@ -64,7 +66,7 @@ class CrawlOtherCompanyLinks(scrapy.Spider, ABC):
         """
         item = OtherCountryItem()
 
-        item['index'] = extract_tags_links(response)
+        item['index'] = extract_links(response)
 
         return item
 
@@ -96,14 +98,13 @@ class ParseOtherCountryCompanyInfo(scrapy.Spider):
         company_info = {
             'country': self.country,
             'page_code': response.text,
-
         }
+
         info_title = response.xpath('''//*[@class="col-xs-12 col-sm-3 row_label"]''')
         info_value = response.xpath('''//*[@class="col-xs-12 col-sm-9"]''')
 
         for title, value in zip(info_title, info_value):
-            company_info[title.extract().split('</')[0].split('>').pop().strip()] = \
-                value.extract().split('</')[0].split('>').pop().strip()
+            company_info[title.css('::text').get()] = value.css('::text').get()
 
         item['company_info'] = company_info
 

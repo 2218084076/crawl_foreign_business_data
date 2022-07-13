@@ -1,7 +1,7 @@
 from scrapy import Selector
 
-from crawl_foreign_business_data.spiders.spain_spider import SpainCrawlCityIndex, SpainCrawlPageLink, \
-    ParseSpainCompanyInfo
+from crawl_foreign_business_data.spiders.spain_spider import (
+    ParseSpainCompanyInfo, SpainCrawlCityIndex, SpainCrawlPageLink)
 
 
 def test_spain_crawl_city_index():

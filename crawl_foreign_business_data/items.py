@@ -14,8 +14,6 @@ class RussiaCompanyItem(scrapy.Item):
     index_list = scrapy.Field()
     russia_company_infos = scrapy.Field()
 
-    pass
-
 
 class SpainItem(scrapy.Item):
     # define the fields for your item here like:
@@ -25,8 +23,6 @@ class SpainItem(scrapy.Item):
     company_links = scrapy.Field()
     spain_company_infos = scrapy.Field()
 
-    pass
-
 
 class OtherCountryItem(scrapy.Item):
     # define the fields for your item here like:
@@ -34,5 +30,3 @@ class OtherCountryItem(scrapy.Item):
 
     index = scrapy.Field()
     company_info = scrapy.Field()
-
-    pass

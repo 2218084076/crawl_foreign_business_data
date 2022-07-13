@@ -139,7 +139,7 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-### Customs
+### additional
 
 .idea
 **/settings.local.yml

@@ -1,7 +1,9 @@
 """Cmdline"""
 import click
 from click import Context
-from runer import australia_runer, russia_runer, spain_runer
+
+from crawl_foreign_business_data.runer import (australia_runer, russia_runer,
+                                               spain_runer)
 
 
 @click.group(invoke_without_command=True)
