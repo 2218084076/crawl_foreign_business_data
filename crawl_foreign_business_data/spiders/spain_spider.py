@@ -1,9 +1,11 @@
 from abc import ABC
 
 import scrapy
-import settings
-from items import SpainItem
-from repositories.redis_repositories import RedisRepositories
+
+from crawl_foreign_business_data import settings
+from crawl_foreign_business_data.items import SpainItem
+from crawl_foreign_business_data.repositories.redis_repositories import \
+    RedisRepositories
 
 redis_repositories = RedisRepositories()
 

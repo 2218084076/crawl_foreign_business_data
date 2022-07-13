@@ -10,12 +10,22 @@ def test_extract_russian_links():
     test_extract_russian_links
     :return:
     """
-    with open('data/russia_page.html', 'r', encoding='utf-8') as f:
-        response = Selector(text=f.read())
-        url = 'https://www.rusprofile.ru/ip/М'
+    page_text = '''
+<!DOCTYPE html>
+<html lang="ru">
 
-        result = extract_russian_company_links(url, response)
-        assert result == (['https://www.rusprofile.ru/ip/305233215000190'], ['https://www.rusprofile.ru/ip/М'])
+<li><a href="/ip/"></a></li>
+<li><a href="/ip/305233215000190"></a></li>
+<li><a href="/ip/М">page1</a></li>
+
+</html>
+   
+   '''
+    response = Selector(text=page_text)
+    url = 'https://www.rusprofile.ru/ip/М'
+
+    result = extract_russian_company_links(url, response)
+    assert result == (['https://www.rusprofile.ru/ip/305233215000190'], ['https://www.rusprofile.ru/ip/М'])
 
 
 @pytest.mark.parametrize(
@@ -57,8 +67,27 @@ def test_parse_russia_company_info(mocker):
     :param mocker:
     :return:
     """
-    with open('data/ruaaia_company_info.html', 'r', encoding='utf-8') as f:
-        response = mocker.MagicMock(text=f.read())
-        result = ParseRussiaCompanyInfo().parse(response)
+    page_text = '''
+<html>
+<meta content="text/html; charset=utf-8">
+<div id="main">
+    <div class="container">
+        <div class="company-header">
+            <div>
+                <h1 itemprop="name" class="">company-name</h1>
+                <div class="tile-item">
+                    <dl>
+                        <dt>foo</dt>
+                        <dd>bar</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+    '''
+    response = mocker.MagicMock(text=page_text)
+    result = ParseRussiaCompanyInfo().parse(response)
 
-        assert result.get('russia_company_infos').get('OGRNIP') == '319508100170320'
+    assert result.get('russia_company_infos').get('foo') == 'bar'

@@ -68,6 +68,3 @@ def australia_runer():
     d.addBoth(lambda _: reactor.stop())
 
     reactor.run()
-
-
-australia_runer()
