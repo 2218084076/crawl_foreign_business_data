@@ -1,3 +1,4 @@
+"""Other country spider"""
 from abc import ABC
 
 import scrapy
@@ -21,8 +22,8 @@ def extract_links(response):
     """
     items = []
     tag_a = response.xpath('//a')
-    for a in tag_a:
-        items.append(a.css('a::attr(href)').get())
+    for tag in tag_a:
+        items.append(tag.css('a::attr(href)').get())
 
     return items
 
@@ -100,7 +101,9 @@ class ParseOtherCountryCompanyInfo(scrapy.Spider):
             'page_code': response.text,
         }
 
-        info_title = response.xpath('''//*[@class="col-xs-12 col-sm-3 row_label"]''')
+        info_title = response.xpath('''
+            //*[@class="col-xs-12 col-sm-3 row_label"]
+        ''')
         info_value = response.xpath('''//*[@class="col-xs-12 col-sm-9"]''')
 
         for title, value in zip(info_title, info_value):

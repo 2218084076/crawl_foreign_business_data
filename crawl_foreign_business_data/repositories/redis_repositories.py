@@ -1,3 +1,4 @@
+"""Redis repositories"""
 import hashlib
 import logging
 
@@ -17,12 +18,17 @@ class RedisRepositories:
             decode_responses=True)
 
     def add_url(self, url: str):
+        """
+        add_url
+        :param url:
+        :return:
+        """
         res = self.redis_content.sadd('key', get_md5(url))
 
         if res == 0:
             return False
-        else:
-            return True
+
+        return True
 
     def write_to_redis(self, name: str, content: str):
         """
@@ -32,9 +38,14 @@ class RedisRepositories:
         """
         if self.add_url(content):
             self.redis_content.lpush(name, content)
-        logger.debug('write to %s %s' % (name, content))
+            logger.debug('write to %s %s', name, content)
 
     def read_redis(self, name: str):
+        """
+        read_redis
+        :param name:
+        :return:
+        """
         end_num = self.redis_content.llen(name)
         content_list = self.redis_content.lrange(name, 0, end_num)
 

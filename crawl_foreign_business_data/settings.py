@@ -1,3 +1,4 @@
+"""settings"""
 # Scrapy settings for crawl_foreign_business_data project
 #
 # For simplicity, this file contains only settings considered important or
@@ -20,7 +21,10 @@ MONGO_CONFIG = {
 
 # Other Country config
 OTHER_COUNTRY_CONFIG = {
-    'start_urls': ['https://www.nzlbusiness.com/', 'https://www.aus61business.com/']
+    'start_urls': [
+        'https://www.nzlbusiness.com/',
+        'https://www.aus61business.com/'
+    ]
 }
 # Spain config
 SPAIN_CONFIG = {
@@ -99,8 +103,9 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
-    # 'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
-    # 'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300
+    'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
+    'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
+    'crawl_foreign_business_data.pipelines.base_pipeline.BasePipeline': 230,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

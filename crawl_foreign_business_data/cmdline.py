@@ -16,7 +16,9 @@ def main(ctx: Context):
 
 
 @main.command()
-@click.option('-n', '--name', help='选择要抓取的国家名称 Russia（俄罗斯）、Spain（西班牙）、Australia（新西兰和澳大利亚）')
+@click.option(
+    '-n', '--name',
+    help='选择要抓取的国家名称 Russia（俄罗斯）、Spain（西班牙）、Australia（新西兰和澳大利亚）')
 def crawl(name: str):
     """
     open crawler  "crawler --help"  show more help

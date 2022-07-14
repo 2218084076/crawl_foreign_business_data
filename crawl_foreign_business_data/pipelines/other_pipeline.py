@@ -1,3 +1,4 @@
+"""Other country pipeline"""
 from scrapy import Spider
 
 from crawl_foreign_business_data.pipelines.base_pipeline import BasePipeline
@@ -11,6 +12,7 @@ mongo_repositories = MongoRepositories('localhost:27017', 'BusinessInfos')
 
 
 class OtherPipeline(BasePipeline):
+    """Other country Pipeline"""
 
     def process_item(self, item: dict, spider: Spider):
         """
@@ -35,7 +37,7 @@ class OtherPipeline(BasePipeline):
                         redis_repositories.write_to_redis('CrawlOtherCompanyLinks', url)
 
                 else:
-                    spider.logger.debug('"%s" does not meet the rules!' % url)
+                    spider.logger.debug(f'"{url}" does not meet the rules!')
 
         if 'company_info' in item:
 
@@ -44,9 +46,9 @@ class OtherPipeline(BasePipeline):
             if 'NewZealand' in company_info.get('country'):
                 mongo_repositories.collection_name = 'NewZealand'
                 mongo_repositories.increase(company_info)
-                spider.logger.info('save %s to mongo' % item)
+                spider.logger.info(f'save {item} to mongo')
 
             if 'Australia' in company_info.get('country'):
                 mongo_repositories.collection_name = 'Australia'
                 mongo_repositories.increase(company_info)
-                spider.logger.info('save %s to mongo' % item)
+                spider.logger.info(f'save {item} to mongo')

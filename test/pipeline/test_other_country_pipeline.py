@@ -48,7 +48,8 @@ def test_process_item(mocker, item_key, item):
 
     if 'aus61business/company' in item:
         OtherPipeline().process_item(test_item, mocker.MagicMock())
-        mock_write_to_redis.assert_called_with('CrawlOtherCompanyLinks', 'aus61business/company')
+        mock_write_to_redis.assert_called_with(
+            'CrawlOtherCompanyLinks', 'aus61business/company')
 
     if item_key == 'company_info' and item.get('country') == 'NewZealand':
         OtherPipeline().process_item(test_item, mocker.MagicMock())

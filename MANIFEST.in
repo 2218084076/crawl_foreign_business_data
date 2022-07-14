@@ -1,9 +1,0 @@
-include LICENSE
-include MANIFEST.in
-include *.md
-
-graft tests
-graft crawl_foreign_business_data
-
-global-exclude __pycache__
-global-exclude *.py[co]

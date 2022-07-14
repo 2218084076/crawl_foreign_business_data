@@ -1,3 +1,4 @@
+"""Test spain spider"""
 from scrapy import Selector
 
 from crawl_foreign_business_data.spiders.spain_spider import (

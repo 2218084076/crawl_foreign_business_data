@@ -1,3 +1,4 @@
+"""Spain spider"""
 from abc import ABC
 
 import scrapy
@@ -30,8 +31,8 @@ class SpainCrawlCityIndex(scrapy.Spider, ABC):
         item = SpainItem()
 
         tag_a = response.xpath('//a')
-        for a in tag_a:
-            items.append(a.css('a::attr(href)').get())
+        for tag in tag_a:
+            items.append(tag.css('a::attr(href)').get())
 
         item['city'] = items
 
@@ -87,8 +88,8 @@ class ParseSpainCompanyInfo(scrapy.Spider, ABC):
         }
         num = len(response.xpath('//*[@class="list06 adr"]//li'))
         for i in range(1, num + 1):
-            content = response.xpath('//*[@id="datos-externos1"]/ul/li[%s]//text()' % i).getall()
-            company_info[content[0]] = ''.join(content[1:]).split('\n')[0].replace(': ', '')
+            content = response.xpath(f'//*[@id="datos-externos1"]/ul/li[{i}]//text()').getall()
+            company_info[content[0]] = ''.join(content[1:]).split('\n', maxsplit=1)[0]
 
         item['spain_company_infos'] = company_info
 

@@ -1,3 +1,4 @@
+"""Test russia spider"""
 import pytest
 from scrapy import Selector
 
@@ -56,7 +57,7 @@ def test_russia_crawl_index(url):
 
     if url == "/ip/A":
         result = RussiaCrawlIndex().parse(response)
-        assert result == {'index_list': ['https://www.rusprofile.ru%s' % url]}
+        assert result == {'index_list': [f'https://www.rusprofile.ru{url}']}
 
     else:
         result = RussiaCrawlIndex().parse(response)

@@ -14,7 +14,8 @@ from crawl_foreign_business_data.repositories.redis_repositories import \
         ('city', ['provincia', 'Actividad']),
         ('city', None),
         ('city', ['test']),
-        ('company_links', ['/FOO-TEST.html', '/PgNum.html']),
+        ('company_links', ['/FOO-TEST.html']),
+        ('company_links', ['/PgNum.html']),
         ('company_links', [None]),
         ('spain_company_infos', {'foo': 'bar'}),
     ]
@@ -51,7 +52,14 @@ def test_spain_process_item(mocker, item, item_key):
         mock_write_to_redis.assert_called()
         assert result.get(item_key) == item
 
-    if item_key == 'company_links' and item != [None]:
+    if item_key == 'company_links' and item == ['/FOO-TEST.html']:
+        result = SpainPipeline().process_item(test_item, mocker.MagicMock())
+        mock_write_to_redis.assert_called_with(
+            'SpainCrawlCompanyLink',
+            '/FOO-TEST.html')
+        assert result.get(item_key) == item
+
+    if item_key == 'company_links' and item == ['/PgNum.html']:
         result = SpainPipeline().process_item(test_item, mocker.MagicMock())
         mock_write_to_redis.assert_called_with('SpainCrawlCityIndex', '/PgNum.html')
         assert result.get(item_key) == item

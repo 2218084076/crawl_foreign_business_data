@@ -1,9 +1,5 @@
-# Define here the models for your spider middleware
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+"""Middlewares"""
 
-# useful for handling different item types with a single interface
 import random
 
 from repositories.redis_repositories import RedisRepositories
@@ -104,12 +100,25 @@ class CrawlForeignBusinessDataDownloaderMiddleware:
         pass
 
     def spider_opened(self, spider):
+        """
+        spider_opened
+        :param spider:
+        :return:
+        """
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
 class CrawlForeignBusinessDataRetryMiddleware(RetryMiddleware):
+    """CrawlForeign Business Data Retry Middleware"""
 
     def process_response(self, request, response, spider):
+        """
+        process_response
+        :param request:
+        :param response:
+        :param spider:
+        :return:
+        """
         if request.meta.get('dont_retry', False):
             return response
 
@@ -119,11 +128,18 @@ class CrawlForeignBusinessDataRetryMiddleware(RetryMiddleware):
 
         if response.status in self.retry_http_codes:
             reason = response.status
-            spider.logger.info('retry_http_code %s' % response.status)
+            spider.logger.info(f'retry_http_code {response.status}')
             return self._retry(request, reason, spider) or response
         return response
 
     def process_exception(self, request, exception, spider):
+        """
+        process_exception
+        :param request:
+        :param exception:
+        :param spider:
+        :return:
+        """
 
         if (
                 isinstance(exception, self.EXCEPTIONS_TO_RETRY)
@@ -141,19 +157,30 @@ class CrawlForeignBusinessDataProxyMiddleware(object):
 
     @classmethod
     def from_crawler(cls, crawler):
+        """
+        from_crawler
+        :param crawler:
+        :return:
+        """
         proxy_ip = crawler.settings.get('PROXY')
 
         return cls(proxy_ip)
 
     def process_request(self, request, spider):
+        """
+        process_request
+        :param request:
+        :param spider:
+        :return:
+        """
 
         if request.url.startswith('http://'):
-            request.meta['proxy'] = 'http://%s' % self.proxy
-            spider.logger.info('proxy %s' % self.proxy)
+            request.meta['proxy'] = f'http://{self.proxy}'
+            spider.logger.info(f'proxy {self.proxy}')
 
         elif request.url.startswith('https://'):
-            request.meta['proxy'] = 'https://%s' % self.proxy
-            spider.logger.info('proxy %s' % self.proxy)
+            request.meta['proxy'] = f'https://{self.proxy}'
+            spider.logger.info(f'proxy {self.proxy}')
 
 
 class DefineHeadersMiddleware:
@@ -166,12 +193,23 @@ class DefineHeadersMiddleware:
 
     @classmethod
     def from_crawler(cls, crawler):
+        """
+        from_crawler
+        :param crawler:
+        :return:
+        """
 
         return cls(user_agent=crawler.settings.get('USER_AGENT'))
 
     def process_request(self, request, spider):
+        """
+        process_request
+        :param request:
+        :param spider:
+        :return:
+        """
         spider_name = spider.name
-        spider.logger.info('spider.name: %s' % spider_name)
+        spider.logger.info(f'spider.name: {spider_name}')
         if 'Russia' in spider_name:
             request.headers['User-Agent'] = random.choice(self.user_agent.get('RUSSIA'))
 

@@ -7,10 +7,11 @@ from scrapy.crawler import Crawler
 
 
 class MongoRepositories:
+    """Mongo Repositories"""
     logger = logging.getLogger(__name__)
 
     def __init__(self, mongo_uri, mongo_db):
-        self.db = None
+        self.database = None
         self.client = None
         self.collection_name = ''
         self.mongo_uri = mongo_uri
@@ -35,7 +36,7 @@ class MongoRepositories:
         :return:
         """
         self.client = pymongo.MongoClient(self.mongo_uri)
-        self.db = self.client[self.mongo_db]
+        self.database = self.client[self.mongo_db]
         self.logger.info('open mongo')
 
     def close_mongo(self):
@@ -53,4 +54,4 @@ class MongoRepositories:
         :param item_content:
         :return:
         """
-        self.db[self.collection_name].insert_one(ItemAdapter(item_content).asdict())
+        self.database[self.collection_name].insert_one(ItemAdapter(item_content).asdict())

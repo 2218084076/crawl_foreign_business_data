@@ -6,6 +6,10 @@ from crawl_foreign_business_data.repositories.mongo_repositories import \
 
 
 def test_increase():
+    """
+    test_increase
+    :return:
+    """
     test_content = {'foo': 'bar'}
 
     mongo_repositories = MongoRepositories('localhost:27017', 'test')

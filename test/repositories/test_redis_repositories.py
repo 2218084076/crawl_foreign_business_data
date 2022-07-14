@@ -22,15 +22,21 @@ def test_add_url():
     test_add_url
     :return:
     """
+
     def del_set():
-        r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
-        r.delete('key')
+        redis_connect = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+        redis_connect.delete('key')
 
     def add():
         md5 = hashlib.md5()
         md5.update('foo'.encode('utf-8'))
-        r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
-        r.sadd('key', md5.hexdigest())
+        test_redis = redis.Redis(
+            host='localhost',
+            port=6379,
+            db=0,
+            decode_responses=True
+        )
+        test_redis.sadd('key', md5.hexdigest())
 
     del_set()
     assert RedisRepositories().add_url('bar')

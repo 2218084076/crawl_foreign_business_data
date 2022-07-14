@@ -1,3 +1,4 @@
+"""Items"""
 # Define here the models for your scraped items
 #
 # See documentation in:
@@ -16,8 +17,7 @@ class RussiaCompanyItem(scrapy.Item):
 
 
 class SpainItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+    """Spain Item"""
 
     city = scrapy.Field()
     company_links = scrapy.Field()
@@ -25,8 +25,7 @@ class SpainItem(scrapy.Item):
 
 
 class OtherCountryItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+    """Other Country Item"""
 
     index = scrapy.Field()
     company_info = scrapy.Field()

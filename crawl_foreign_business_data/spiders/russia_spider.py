@@ -1,3 +1,4 @@
+"""Russia spider"""
 import re
 from abc import ABC
 
@@ -24,8 +25,8 @@ def extract_russian_company_links(page_url, response):
     category_list = []
 
     tag_a = response.xpath('//a')
-    for a in tag_a:
-        url = a.css('a::attr(href)').get()
+    for tag in tag_a:
+        url = tag.css('a::attr(href)').get()
         if 'ip' in url and len(re.sub(r'\D', "", url.split('ip/')[1])) > 5:
             if 'https://www.rusprofile.ru' not in url:
                 url = 'https://www.rusprofile.ru' + url
@@ -59,15 +60,15 @@ class RussiaCrawlIndex(scrapy.Spider):
         urls_list = response.xpath('//*[@class="letter-list"]//li')
 
         for url in urls_list:
-            u = url.css('a::attr(href)').get()
+            now_url = url.css('a::attr(href)').get()
             try:
-                if 'ip' in u and 'https://www.rusprofile.ru' not in u:
-                    u = 'https://www.rusprofile.ru' + u
-                    items.append(u)
+                if 'ip' in now_url and 'https://www.rusprofile.ru' not in now_url:
+                    now_url = 'https://www.rusprofile.ru' + now_url
+                    items.append(now_url)
                 else:
-                    self.logger.debug('"%s" 不是按首字母分类' % u)
+                    self.logger.debug(f'"{now_url}" 不是按首字母分类')
             except TypeError:
-                self.logger.debug('"%s"  does not exist' % u)
+                self.logger.debug(f'"{now_url}"  does not exist')
 
         item['index_list'] = items
 
@@ -144,7 +145,8 @@ class ParseRussiaCompanyInfo(scrapy.Spider, ABC):
         # //*[@id="ab-test-wrp"]/div[1]/div/div[1]/div/div[1]/div[1]
         company_info = {
             'Название компании':
-                response.xpath('//*[@id="main"]/div/div[1]/div[1]/h1/text()').get().replace('\n', '').replace(' ', ''),
+                response.xpath(
+                    '//*[@id="main"]/div/div[1]/div[1]/h1/text()').get().replace('\n', '').replace(' ', ''),
             'page_code': page
         }
         for info in info_list:

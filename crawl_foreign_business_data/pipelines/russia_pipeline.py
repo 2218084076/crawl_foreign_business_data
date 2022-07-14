@@ -1,3 +1,4 @@
+"""Russia pipeline"""
 from scrapy import Spider
 
 from crawl_foreign_business_data.pipelines.base_pipeline import BasePipeline
@@ -11,6 +12,7 @@ mongo_repositories = MongoRepositories('localhost:27017', 'BusinessInfos')
 
 
 class RussiaPipeline(BasePipeline):
+    """Russia Pipeline"""
 
     def process_item(self, item, spider: Spider):
         """
@@ -28,8 +30,8 @@ class RussiaPipeline(BasePipeline):
 
         if 'page_list' in item:
             page_list = dict(item).get('page_list')
-            for p in page_list:
-                redis_repositories.write_to_redis(spider.name, p)
+            for page in page_list:
+                redis_repositories.write_to_redis(spider.name, page)
 
         if 'company_list' in item:
             company_list = dict(item).get('company_list')
@@ -40,5 +42,5 @@ class RussiaPipeline(BasePipeline):
             item_content = item.get('russia_company_infos')
             mongo_repositories.collection_name = 'Russia Company Info'
             mongo_repositories.increase(item_content)
-            spider.logger.info('save %s to mongo' % item)
+            spider.logger.info(f'save {item} to mongo')
         return item
