@@ -1,10 +1,21 @@
-# crawl_foreign_business_data
+# crawl foreign business data
 
-使用scrapy抓取国外商业数据
+使用scrapy抓取罗斯、西班牙、新西兰和澳大利亚商业数据
 
 # 使用说明
 
+- pip安装[pip install crawl-foreign-business-data==0.0.3](https://pypi.org/project/crawl-foreign-business-data/0.0.3/)
+  或者下载[crawl_foreign_business_data-0.0.3-py3-none-any.whl](https://pypi.org/project/crawl-foreign-business-data/0.0.3/#files)
+  文件进行安装。
+- 使用命令行crawl_foreign_business_data运行，
 
+    - You can get help with (crawl_foreign_business_data --help );
+    - How to run the crawler (crawl_foreign_business_data crawl --name [country name]  E.g：crawl_foreign_business_data
+      crawl --name Russia)
+
+        - Available countries are: Russia（俄罗斯）、Spain（西班牙）、Australia（新西兰和澳大利亚）
+
+    - You can also get further help through  (crawl_foreign_business_data crawl --help)
 
 # 抓取方案
 
@@ -33,14 +44,14 @@
 
 ### 使用命令行运行爬虫文件
 
-- 使用cmdline文件运行前，确保settings中的对应要抓取的国家的pipeline配置处于打开状态。
-  - ```text
-    'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
-    'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
-    'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
-    'crawl_foreign_business_data.pipelines.base_pipeline.BasePipeline': 230,
+- 使用cmdline文件运行前，确保settings中的对应要抓取的国家的pipeline配置注释部分处于打开状态。
+    - ```text
+  'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
+  'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
+  'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
+  'crawl_foreign_business_data.pipelines.base_pipeline.BasePipeline': 230,
     ```
-- 
+-
 
 ### 公司详细信息结构
 
