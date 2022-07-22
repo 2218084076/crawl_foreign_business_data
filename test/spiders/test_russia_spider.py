@@ -1,4 +1,6 @@
 """Test russia spider"""
+from typing import Any
+
 import pytest
 from scrapy import Selector
 
@@ -40,7 +42,7 @@ def test_extract_russian_links():
         "https://www.rusprofile.ru/TEST"
     ]
 )
-def test_russia_crawl_index(url):
+def test_russia_crawl_index(url: Any):
     """
     test_russia_crawl_index
     :param url:

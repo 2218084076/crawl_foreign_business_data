@@ -1,4 +1,6 @@
 """Test spain pipeline"""
+from typing import Any
+
 import pytest
 
 from crawl_foreign_business_data.pipelines.spain_pipeline import SpainPipeline
@@ -20,7 +22,7 @@ from crawl_foreign_business_data.repositories.redis_repositories import \
         ('spain_company_infos', {'foo': 'bar'}),
     ]
 )
-def test_spain_process_item(mocker, item, item_key):
+def test_spain_process_item(mocker, item: Any, item_key: str):
     """
     test_spain_process_item
     :param mocker:

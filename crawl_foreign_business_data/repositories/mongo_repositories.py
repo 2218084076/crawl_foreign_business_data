@@ -10,7 +10,7 @@ class MongoRepositories:
     """Mongo Repositories"""
     logger = logging.getLogger(__name__)
 
-    def __init__(self, mongo_uri, mongo_db):
+    def __init__(self, mongo_uri: str, mongo_db: str):
         self.database = None
         self.client = None
         self.collection_name = ''

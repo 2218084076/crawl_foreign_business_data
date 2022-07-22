@@ -2,9 +2,11 @@
 
 import random
 
-from repositories.redis_repositories import RedisRepositories
-from scrapy import signals
+from scrapy import Request, Spider, signals
 from scrapy.downloadermiddlewares.retry import RetryMiddleware
+
+from crawl_foreign_business_data.repositories.redis_repositories import \
+    RedisRepositories
 
 redis_repositories = RedisRepositories()
 
@@ -99,7 +101,7 @@ class CrawlForeignBusinessDataDownloaderMiddleware:
         # - return a Request object: stops process_exception() chain
         pass
 
-    def spider_opened(self, spider):
+    def spider_opened(self, spider: Spider):
         """
         spider_opened
         :param spider:
@@ -166,7 +168,7 @@ class CrawlForeignBusinessDataProxyMiddleware(object):
 
         return cls(proxy_ip)
 
-    def process_request(self, request, spider):
+    def process_request(self, request: Request, spider: Spider):
         """
         process_request
         :param request:

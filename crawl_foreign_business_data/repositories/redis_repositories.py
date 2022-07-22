@@ -61,7 +61,7 @@ class RedisRepositories:
         self.redis_content.lpush(name, content)
 
 
-def get_md5(val):
+def get_md5(val: str):
     """
     把目标数据进行哈希，用哈希值去重更快
     :param val:

@@ -103,8 +103,8 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
-    'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
-    'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
+    # 'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
+    # 'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
     'crawl_foreign_business_data.pipelines.base_pipeline.BasePipeline': 230,
 }
 

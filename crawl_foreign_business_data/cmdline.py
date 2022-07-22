@@ -2,16 +2,21 @@
 import click
 from click import Context
 
+from crawl_foreign_business_data import __version__
 from crawl_foreign_business_data.runer import (australia_runer, russia_runer,
                                                spain_runer)
 
 
 @click.group(invoke_without_command=True)
 @click.pass_context
-def main(ctx: Context):
+@click.option('-V', '--version', is_flag=True, help='Show version and exit.')
+def main(ctx: Context, version: str):
     """Main commands"""
 
-    if ctx.invoked_subcommand is None:
+    if version:
+        click.echo(__version__)
+
+    elif ctx.invoked_subcommand is None:
         click.echo(ctx.get_help())
 
 

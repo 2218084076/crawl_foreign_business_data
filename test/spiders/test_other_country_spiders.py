@@ -65,7 +65,7 @@ def test_crawl_company_links(mocker):
             'nzlbusiness'
     )
 )
-def test_parse_other_country_company_info(url):
+def test_parse_other_country_company_info(url: str):
     """
     test_parse_other_country_company_info
     :param url:

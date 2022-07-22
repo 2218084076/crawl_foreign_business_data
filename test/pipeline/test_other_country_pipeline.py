@@ -19,7 +19,7 @@ from crawl_foreign_business_data.repositories.redis_repositories import \
         ('company_info', {'country': 'Australia'}),
     ]
 )
-def test_process_item(mocker, item_key, item):
+def test_process_item(mocker, item_key: str, item: str):
     """
     test_process_item
     :param mocker:

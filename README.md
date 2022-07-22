@@ -31,14 +31,16 @@
 - [新西兰](https://www.nzlbusiness.com/) 与 [澳大利亚](https://www.aus61business.com/)
   是一家网站提供，结构相同。 通过首字母索引进行分类，并在每一次抓取中将分页链接以及公司详情页分别存到所对应的redis中，
 
-### 新加坡企业信息网
-
-- [新加坡](https://www.sgpbusiness.com/activities/industrial-classification/)
-  该网站请求中设置了Google验证，所以目前选用自动化工具来完成， 思路仍然是通过不同链接的区别进行区分，最终遍历解析详情页。
-
 ### 使用命令行运行爬虫文件
 
-- 使用cmdline前，确保settings中的对应pipeline配置处于打开状态。
+- 使用cmdline文件运行前，确保settings中的对应要抓取的国家的pipeline配置处于打开状态。
+  - ```text
+    'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
+    'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
+    'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
+    'crawl_foreign_business_data.pipelines.base_pipeline.BasePipeline': 230,
+    ```
+- 
 
 ### 公司详细信息结构
 

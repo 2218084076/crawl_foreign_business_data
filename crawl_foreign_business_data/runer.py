@@ -1,3 +1,4 @@
+"""runer"""
 import logging
 
 from scrapy.crawler import CrawlerRunner
@@ -18,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 def russia_runer():
+    """russia runer"""
     configure_logging()
     settings = get_project_settings()
 
@@ -35,6 +37,7 @@ def russia_runer():
 
 
 def spain_runer():
+    """Spain runer"""
     configure_logging()
     settings = get_project_settings()
 
@@ -52,6 +55,7 @@ def spain_runer():
 
 
 def australia_runer():
+    """other country runer"""
     configure_logging()
     settings = get_project_settings()
 

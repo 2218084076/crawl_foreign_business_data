@@ -17,7 +17,7 @@ from crawl_foreign_business_data.repositories.mongo_repositories import \
         ('russia_company_infos', {'foo': 'bar'})
     ]
 )
-def test_russia_process_item(mocker, key, value):
+def test_russia_process_item(mocker, key: str, value: str):
     """
     test_russia_process_item
     :param mocker:
