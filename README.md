@@ -9,13 +9,13 @@
   文件进行安装。
 - 使用命令行crawl_foreign_business_data运行，
 
-    - You can get help with (crawl_foreign_business_data --help );
-    - How to run the crawler (crawl_foreign_business_data crawl --name [country name]  E.g：crawl_foreign_business_data
+    - 获取帮助 - You can get help with (crawl_foreign_business_data --help );
+    - 爬虫运行 - How to run the crawler (crawl_foreign_business_data crawl --name [country name] ; E.g：crawl_foreign_business_data
       crawl --name Russia)
 
-        - Available countries are: Russia（俄罗斯）、Spain（西班牙）、Australia（新西兰和澳大利亚）
+        - 抓取目标国家候选项 - Available countries are: Russia（俄罗斯）、Spain（西班牙）、Australia（新西兰和澳大利亚）
 
-    - You can also get further help through  (crawl_foreign_business_data crawl --help)
+    - 获取爬虫help信息 - You can also get further help through  (crawl_foreign_business_data crawl --help)
 
 # 抓取方案
 
@@ -46,12 +46,11 @@
 
 - 使用cmdline文件运行前，确保settings中的对应要抓取的国家的pipeline配置注释部分处于打开状态。
     - ```text
-  'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
-  'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
-  'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
-  'crawl_foreign_business_data.pipelines.base_pipeline.BasePipeline': 230,
-    ```
--
+      'crawl_foreign_business_data.pipelines.russia_pipeline.RussiaPipeline': 300,
+      'crawl_foreign_business_data.pipelines.spain_pipeline.SpainPipeline': 300,
+      'crawl_foreign_business_data.pipelines.other_pipeline.OtherPipeline': 300,
+      'crawl_foreign_business_data.pipelines.base_pipeline.BasePipeline': 230, 
+      ```
 
 ### 公司详细信息结构
 
