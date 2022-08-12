@@ -4,9 +4,11 @@
 
 # 使用说明
 
-- pip安装[pip install crawl-foreign-business-data==0.0.3](https://pypi.org/project/crawl-foreign-business-data/0.0.3/)
-  或者下载[crawl_foreign_business_data-0.0.3-py3-none-any.whl](https://pypi.org/project/crawl-foreign-business-data/0.0.3/#files)
-  文件进行安装。
+- pip安装，下载[crawl_foreign_business_data-0.0.3-py3-none-any.whl](dist/crawl_foreign_business_data-0.0.3-py3-none-any.whl)
+  文件进行安装。 
+  - ```text
+    pip install crawl-foreign-business-data
+    ```
 - 使用命令行crawl_foreign_business_data运行，
 
     - 获取帮助 - You can get help with (crawl_foreign_business_data --help );
